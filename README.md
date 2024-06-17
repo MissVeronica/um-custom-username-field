@@ -1,5 +1,5 @@
 # UM Custom Username Field
-Extension to Ultimate Member for selecting a Registration custom field as Username.
+Extension to Ultimate Member for selecting a Registration Custom field as Username.
 
 ## UM Settings -> Appearance -> Registration Form
 1. UM meta_key - UM meta_key name to be used as Username. Examples: first_name or last_name
