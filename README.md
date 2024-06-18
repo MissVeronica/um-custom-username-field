@@ -7,6 +7,7 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 ## UM Forms -> Login form
 1. Use the default Form field "Username" for User identification.
 2. Users can be identified by both Username, Email address and the UM meta_key value.
+3. Add the additional Custom user field for identification in the Label.
 
 ## Updates
 1. Version 1.0.0
