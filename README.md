@@ -21,6 +21,10 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 2. Version 1.1.0 Tested with UM 2.8.6
 3. Version 1.2.0 Code improvements by identification both Username, Email address and the UM metas_key value
 
+## References
+1. Unique User Account ID - https://github.com/MissVeronica/um-unique-user-account-id
+2. Unique Membership ID - https://github.com/MissVeronica/um-unique-membership-id
+
 ## Installation
 1. Download the ZIP file and install as a WP Plugin.
 2. Activate the plugin.
