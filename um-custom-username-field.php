@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:     Ultimate Member - Custom Username Field
- * Description:     Extension to Ultimate Member for selecting custom field as Username.
- * Version:         1.0.0
+ * Plugin Name:     Ultimate Member - Extra Custom Username Field
+ * Description:     Extension to Ultimate Member for selecting an extra Registration Custom field for Login.
+ * Version:         1.2.0
  * Requires PHP:    7.4
  * Author:          Miss Veronica
  * License:         GPL v2 or later
@@ -10,7 +10,7 @@
  * Author URI:      https://github.com/MissVeronica
  * Text Domain:     ultimate-member
  * Domain Path:     /languages
- * UM version:      2.5.0
+ * UM version:      2.8.6
  */
 
 
@@ -23,50 +23,57 @@ class UM_Custom_Username_Field {
 
     function __construct( ) {
 
-        add_filter( 'um_add_user_frontend_submitted', array( $this, 'um_add_user_frontend_submitted_custom_username_field' ), 10, 1 );
-        add_filter( 'pre_user_login',                 array( $this, 'pre_user_login_as_custom_username_field' ), 10, 1 );
-        add_filter( 'um_settings_structure',          array( $this, 'um_settings_structure_custom_username_field' ), 10, 1 );
+        add_filter( 'um_submit_form_data',   array( $this, 'um_add_user_frontend_submitted_custom_username_field' ), 10, 3 );
+        add_filter( 'um_settings_structure', array( $this, 'um_settings_structure_custom_username_field' ), 10, 1 );
     }
 
-    public function um_add_user_frontend_submitted_custom_username_field( $args ) {
+    public function um_add_user_frontend_submitted_custom_username_field( $post_form, $mode, $all_cf_metakeys  ) {
 
-        $meta_key = trim( sanitize_text_field( UM()->options()->get( 'custom_username_field' )));
+        if ( $mode == 'login' && in_array( 'username', $all_cf_metakeys )) {
 
-        if ( ! empty( $meta_key ) && isset( $args[$meta_key] ) && ! empty( $args[$meta_key] )) {
-            $this->custom_username = trim( sanitize_user( strtolower( remove_accents( $args[$meta_key] ) ), true ));
-        }
+            $custom_username_field = trim( sanitize_text_field( UM()->options()->get( 'custom_username_field' )));
 
-        return $args;
-    }
+            if ( ! empty( $custom_username_field ) ) {
 
-    public function pre_user_login_as_custom_username_field( $user_login ) {
+                $meta_args = array(
+                                    'meta_key'     => $custom_username_field,
+                                    'meta_value'   => $post_form['username'],
+                                    'meta_compare' => '='
+                                );
 
-        if ( ! empty( $this->custom_username ) ) {
+                $user_query = new WP_User_Query( $meta_args );
+                $user_data = $user_query->get_results();
 
-            $count = 1;
-            $temp_user_login = $this->custom_username;
+                if ( ! empty( $user_data )) {
+                    if ( count( $user_data ) == 1 ) {
+                        $user_data = $user_data[0];
+                        $post_form['username'] = $user_data->user_login;
+                        $post_form['submitted']['username'] = $user_data->user_login;
 
-            while ( username_exists( $temp_user_login ) ) {
-                $temp_user_login = $this->custom_username . $count;
-                $count++;
+                    } else {
+                        UM()->form()->add_error( 'username', __( 'There are more than one user registered with this ID', 'ultimate-member' ) );
+                    }
+                }
             }
-            $user_login = $temp_user_login;            
         }
 
-        return $user_login;
+        return $post_form;
     }
 
-    function um_settings_structure_custom_username_field( $settings ) {
+    function um_settings_structure_custom_username_field( $settings_structure ) {
 
-        $settings['appearance']['sections']['registration_form']['fields'][] = array(
-            'id'      => 'custom_username_field',
-            'type'    => 'text',
-            'label'   => __( 'Custom Username Field - UM meta_key', 'ultimate-member' ),
-            'tooltip' => __( 'UM meta_key name to be used as Username. Examples: first_name or last_name', 'ultimate-member' ),
-            'size'    => 'small'
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['custom_username_field']['title']       = __( 'Extra Custom Username Field', 'ultimate-member' );
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['custom_username_field']['description'] = __( 'Plugin version 1.1.0 - tested with UM 2.8.6', 'ultimate-member' );
+
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['custom_username_field']['fields'][] = array(
+            'id'          => 'custom_username_field',
+            'type'        => 'text',
+            'label'       => __( 'UM meta_key', 'ultimate-member' ),
+            'description' => __( 'UM meta_key name to be used as an extra Username field for Login. Examples: um_unique_membership_id or um_unique_account_id', 'ultimate-member' ),
+            'size'        => 'small'
         ); 
-   
-        return $settings;
+
+        return $settings_structure;
     }
 
 }
