@@ -3,14 +3,15 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 
 ## UM Settings -> Appearance -> Registration Form
 1. UM meta_key - UM meta_key name to be used as an extra Username field for Login. Examples: um_unique_membership_id or um_unique_account_id
+2. WP Users fields user_nicename, display_name
 
 ## UM Forms -> Login form
 1. Use the default Form field "Username or email" with the meta_key "username" for Login User identification.
-2. Users can be identified by both Username, Email address and the UM meta_key value.
-3. Add the additional Custom user field for identification in the Label.
+2. Users can be identified by both Username, Email address and the UM meta_key value or WP Users field values.
+3. Add the additional Custom User field for identification in the Label.
 
 ## Error messages
-1. There are more than one user registered with this ID
+1. There are more than one user registered with this %s
 
 ## Translations or Text changes
 1. Use the "Say What?" plugin with text domain ultimate-member
@@ -20,6 +21,7 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 1. Version 1.0.0
 2. Version 1.1.0 Tested with UM 2.8.6
 3. Version 1.2.0 Code improvements by identification both Username, Email address and the UM metas_key value
+4. Version 1.3.0 Addition of the WP Users fields: user_nicename, display_name
 
 ## References
 1. Unique User Account ID - https://github.com/MissVeronica/um-unique-user-account-id
