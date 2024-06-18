@@ -9,6 +9,9 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 2. Users can be identified by both Username, Email address and the UM meta_key value.
 3. Add the additional Custom user field for identification in the Label.
 
+## Error messages
+1. There are more than one user registered with this ID
+
 ## Updates
 1. Version 1.0.0
 2. Version 1.1.0 Tested with UM 2.8.6
