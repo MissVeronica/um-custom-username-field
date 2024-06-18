@@ -12,6 +12,10 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 ## Error messages
 1. There are more than one user registered with this ID
 
+## Translations or Text changes
+1. Use the "Say What?" plugin with text domain ultimate-member
+2. https://wordpress.org/plugins/say-what/
+
 ## Updates
 1. Version 1.0.0
 2. Version 1.1.0 Tested with UM 2.8.6
