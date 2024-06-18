@@ -10,6 +10,10 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 2. Users can be identified by both Username, Email address and the UM meta_key value or WP Users field value.
 3. Add the additional Custom User field or WP Users fields for identification in the Label.
 
+## UM Email
+1. Use the Email placeholder {usermeta:here_any_usermeta_key}
+2. https://docs.ultimatemember.com/article/1340-placeholders-for-email-templates
+
 ## Error messages
 1. There are more than one user registered with this %s
 
