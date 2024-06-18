@@ -6,8 +6,8 @@ Extension to Ultimate Member for selecting an extra Registration Custom field fo
 2. WP Users fields user_nicename, display_name
 
 ## UM Forms Builder -> Login form
-1. Use the default Form field "Username or email" with the meta_key "username" for Login User identification.
-2. Users can be identified by both Username, Email address and the UM meta_key value or WP Users field values.
+1. Use the predefined Form field "Username or email" with the meta_key "username" for Login User identification.
+2. Users can be identified by both Username, Email address and the UM meta_key value or WP Users field value.
 3. Add the additional Custom User field or WP Users fields for identification in the Label.
 
 ## Error messages
