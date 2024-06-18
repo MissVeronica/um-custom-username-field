@@ -1,4 +1,4 @@
-# UM Custom Username Field
+# UM Extra Custom Username Field
 Extension to Ultimate Member for selecting an extra Registration Custom field for Login.
 
 ## UM Settings -> Appearance -> Registration Form
